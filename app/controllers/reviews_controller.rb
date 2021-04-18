@@ -64,6 +64,7 @@ class ReviewsController < ApplicationController
             redirect_to review_path(@review)
         else
             render "edit"
+        end
     end
 
     def form_params
