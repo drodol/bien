@@ -1,0 +1,35 @@
+<%= form_for @review do |f| %>
+
+    <p>
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+    </p>
+
+    <p>
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+    </p>
+
+    <p>
+        <%= f.label :score %>
+        <%= f.number_field :score, in: 1.0..10.0, step: 0.5 %>
+    </p>
+
+    <p>
+        <%= f.label :restaurant %>
+        <%= f.text_field :restaurant %>
+    </p>
+
+    <p>
+        <%= f.label :price %>
+        <%= f.number_field :price %>
+    </p>
+
+    <p>
+        <%= f.label :cuisine %>
+        <%= f.text_field :cuisine %>
+    </p>
+
+    <%= f.submit "Save review" %>
+    
+<% end %>

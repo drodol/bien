@@ -1,0 +1,11 @@
+<h2> <%= @review.title %> </h2>
+<p> <%= simple_format @review.body %> </p>
+<p> Score: <%= @review.score %>/10 </p>
+<p> Restaurant: <%= @review.restaurant %></p>
+<p> Price: <%= @review.price %></p>
+<p> Cuisine: <%= @review.cuisine %></p>
+
+<div class="actions">
+<%= link_to "Edit this review", edit_review_path(@review) %>
+<%= link_to "Delete this review", review_path(@review), method: :delete, data: { confirm: "Are you sure?"} %>
+</div>
