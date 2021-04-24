@@ -27,6 +27,10 @@ gem 'geocoder'
 
 #add simple form
 gem 'simple_form'
+
+#add active_link_to for highlighing active links
+gem 'active_link_to'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
