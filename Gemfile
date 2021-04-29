@@ -39,6 +39,9 @@ gem 'simple_form'
 #add active_link_to for highlighing active links
 gem 'active_link_to'
 
+#add profanity filter
+gem 'profanity_filter'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
