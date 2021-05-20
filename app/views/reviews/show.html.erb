@@ -1,11 +1,30 @@
 <% content_for :page_title, @review.title %>
 
 <h1> <%= @review.title %> </h1>
-<h2> <%= @review.restaurant %> </h2> 
+<h2> <%= @review.restaurant %> </h2>
+
+<% if is_logged_in? %>
+    <p>
+        <% if @review.bookmarks.where(user: @current_user).any? %>
+            <%= link_to "Unbookmark", review_bookmark_path(@review), method: :delete %>
+        <% else %>
+            <%= link_to "Bookmark", review_bookmark_path(@review), method: :post %>
+        <% end %>
+    </p>
+    
+<% end %>
+
 <p> <%= simple_format @review.body %> </p>
 <p> <%= @review.score %>/10 </p>
-<p> Price: <%= @review.price %></p>
-<p> Cuisine: <%= @review.cuisine %></p>
+
+<div class="user">
+    Posted by
+    <% if @review.user.present? %>
+        <%= link_to @review.user.username, user_path(@review.user) %>
+    <% else %>
+        Anonymous
+    <% end  %>
+</div>
 
 <% if @review.ambiance.present? %>
     <div class="ambiance">
@@ -13,10 +32,12 @@
     </div>
 <%end %>
 
-<div class="actions">
-<%= link_to "Edit this review", edit_review_path(@review) %>
-<%= link_to "Delete this review", review_path(@review), method: :delete, data: { confirm: "Are you sure?"} %>
-</div>
+<% if @current_user == @review.user %>
+    <div class="actions">
+    <%= link_to "Edit this review", edit_review_path(@review) %>
+    <%= link_to "Delete this review", review_path(@review), method: :delete, data: { confirm: "Are you sure?"} %>
+    </div>
+<% end %>
 
 <h3>Comments</h3>
 
@@ -25,7 +46,12 @@
         <%= simple_format comment.body %>
 
         <p class="posted">
-            Posted <%= time_ago_in_words comment.created_at %> ago
+            Posted by 
+            <% if comment.user.present? %>
+            <%= link_to comment.user.username, user_path(comment.user) %> <%= time_ago_in_words comment.created_at %> ago
+            <% else %>
+            Anonymous <%= time_ago_in_words comment.created_at %> ago
+            <% end %>
         </p>
     </div>
 <% end %>
